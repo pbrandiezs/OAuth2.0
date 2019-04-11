@@ -192,6 +192,8 @@ def showRestaurants():
 def newRestaurant():
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
+    if 'username' not in login_session:
+      return redirect('/login')
     if request.method == 'POST':
       newRestaurant = Restaurant(name = request.form['name'])
       session.add(newRestaurant)
