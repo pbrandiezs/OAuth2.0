@@ -12,6 +12,14 @@ from flask import session as login_session
 import random
 import string
 
+# IMPORTS FOR THIS STEP
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
+import httplib2
+import json
+from flask import make_response
+import requests
+
 #Connect to Database and create database session
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.bind = engine
