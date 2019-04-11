@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from flask import Flask, render_template, request, redirect,jsonify, url_for, flash
-app = Flask(__name__)
 
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
@@ -19,6 +18,12 @@ import httplib2
 import json
 from flask import make_response
 import requests
+
+app = Flask(__name__)
+
+CLIENT_ID = json.loads(
+    open('client_secrets.json', 'r').read())['web']['client_id']
+APPLICATION_NAME = "Restaurant Menu Application"
 
 #Connect to Database and create database session
 engine = create_engine('sqlite:///restaurantmenu.db')
