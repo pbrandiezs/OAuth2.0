@@ -259,6 +259,11 @@ def deleteRestaurant(restaurant_id):
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     restaurantToDelete = session.query(Restaurant).filter_by(id = restaurant_id).one()
+    if restaurantToDelete.user_id != login_session['user_id']:
+      return "<script>function myFunction() {alert('You are not
+        authorized to delete this restaurant.  Please create your
+        own restaurant in order to delete.');}</script><body 
+        onload='myFunction()''>"
     if request.method == 'POST':
       session.delete(restaurantToDelete)
       flash('%s Successfully Deleted' % restaurantToDelete.name)
