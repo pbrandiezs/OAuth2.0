@@ -219,7 +219,9 @@ def newRestaurant():
     if 'username' not in login_session:
       return redirect('/login')
     if request.method == 'POST':
-      newRestaurant = Restaurant(name = request.form['name'])
+      newRestaurant = Restaurant(name = request.form['name'],
+        user_id=login_session['user_id'])
+
       session.add(newRestaurant)
       flash('New Restaurant %s Successfully Created' % newRestaurant.name)
       session.commit()
