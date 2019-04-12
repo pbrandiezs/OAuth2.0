@@ -277,7 +277,7 @@ def newMenuItem(restaurant_id):
     session = DBSession()
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     if request.method == 'POST':
-        newItem = MenuItem(name = request.form['name'], description = request.form['description'], price = request.form['price'], course = request.form['course'], restaurant_id = restaurant_id)
+        newItem = MenuItem(name = request.form['name'], description = request.form['description'], price = request.form['price'], course = request.form['course'], restaurant_id = restaurant_id, user_id=restaurant.user_id)
         session.add(newItem)
         session.commit()
         flash('New Menu %s Item Successfully Created' % (newItem.name))
