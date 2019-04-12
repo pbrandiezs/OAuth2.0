@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect,jsonify, url_for, fl
 
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Restaurant, MenuItem
+from database_setup import Base, Restaurant, MenuItem, User
 
 # New imports for this step
 from flask import session as login_session
