@@ -42,6 +42,8 @@ def showLogin():
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
     # Validate state token
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
@@ -134,6 +136,8 @@ def gconnect():
 
 
 def createUser(login_session):
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
     newUser = User(name=login_session['username'], email=login_session[
                    'email'], picture=login_session['picture'])
     session.add(newUser)
@@ -143,11 +147,15 @@ def createUser(login_session):
 
 
 def getUserInfo(user_id):
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
     user = session.query(User).filter_by(id=user_id).one()
     return user
 
 
 def getUserID(email):
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
@@ -156,6 +164,8 @@ def getUserID(email):
 
 @app.route('/gdisconnect')
 def gdisconnect():
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
     access_token = login_session.get('access_token')
     if access_token is None:
         print 'Access Token is None'
@@ -186,6 +196,8 @@ def gdisconnect():
 
 @app.route('/fbconnect', methods=['POST'])
 def fbconnect():
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
     if request.args.get('state') != login_session['state']:
       response = make_response(json.dumps('Invalid state parameter.'), 401)
       response.headers['Content-Type'] = 'application/json'
@@ -255,6 +267,8 @@ def fbconnect():
 
 @app.route('/fbdisconnect')
 def fbdisconnect():
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
     facebook_id = login_session['facebook_id']
     access_token = login_session['access_token']
     url = 'https://graph.facebook.com/%s/permissions?access_token=%s' % (facebook_id,access_token)
@@ -264,6 +278,8 @@ def fbdisconnect():
 
 @app.route('/disconnect')
 def disconnect():
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
     if 'provider' in login_session:
         if login_session['provider'] == 'google':
             gdisconnect()
