@@ -11,6 +11,8 @@ def getGeocodeLocation(inputString):
     response, content = h.request(url, 'GET')
     result = json.loads(content)
     print "response header: %s \n \n" % response
-    return result
+    latitude = result['results'][0]['geometry']['location']['lat']
+    longitude = result['results'][0]['geometry']['location']['lng']
+    return (latitude,longitude)
 
 print(getGeocodeLocation("Miami, Florida"))
