@@ -22,7 +22,9 @@ def findARestaurant(mealType,location):
 	#5. Grab the first image
 	#6. If no image is available, insert default a image url
 	#7. Return a dictionary containing the restaurant name, address, and image url	
-    
+    latitude, longitude = getGeocodeLocation(location)
+    print(latitude, longitude)
+
 if __name__ == '__main__':
 	findARestaurant("Pizza", "Tokyo, Japan")
 	findARestaurant("Tacos", "Jakarta, Indonesia")
