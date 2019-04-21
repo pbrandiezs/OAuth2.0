@@ -49,20 +49,28 @@ def findARestaurant(mealType,location):
     )
     resp = requests.get(url=url, params=params)
     data = json.loads(resp.text)
+
     print(json.dumps(data, indent=4))
     print("\n\n")
+    # Get restaurant name
     restaurant = data['response']['groups'][0]['items'][0]['venue']['name']
+
     print(restaurant)
+    
+    # Get venue_id
+    venue_id = data['response']['groups'][0]['items'][0]['venue']['id']
+    print(venue_id)
+    # restaurant_image = data['response']['groups'][0]['items'][0]['venue']['name']
 
 
 
 if __name__ == '__main__':
-	findARestaurant("Pizza", "Tokyo, Japan")
+	# findARestaurant("Pizza", "Tokyo, Japan")
 	# findARestaurant("Tacos", "Jakarta, Indonesia")
 	# findARestaurant("Tapas", "Maputo, Mozambique")
 	# findARestaurant("Falafel", "Cairo, Egypt")
 	# findARestaurant("Spaghetti", "New Delhi, India")
 	# findARestaurant("Cappuccino", "Geneva, Switzerland")
-	# findARestaurant("Sushi", "Los Angeles, California")
+	findARestaurant("Sushi", "Los Angeles, California")
 	# findARestaurant("Steak", "La Paz, Bolivia")
-	# findARestaurant("Gyros", "Sydney, Australia")
+	findARestaurant("Gyros", "Sydney, Australia")
