@@ -89,6 +89,12 @@ def findARestaurant(mealType,location):
     print(imageURL)
     print("\n\n")
 
+    # return a disctionary with restaurant name and image url
+    restaurantInfo = {'name':restaurant, 'image':imageURL}
+    print("Restaurant Name: %s" % restaurantInfo['name'])
+    print("Image: %s" % restaurantInfo['image'])
+    return restaurantInfo
+
 if __name__ == '__main__':
 	# findARestaurant("Pizza", "Tokyo, Japan")
 	# findARestaurant("Tacos", "Jakarta, Indonesia")
