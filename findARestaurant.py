@@ -54,15 +54,40 @@ def findARestaurant(mealType,location):
     print("\n\n")
     # Get restaurant name
     restaurant = data['response']['groups'][0]['items'][0]['venue']['name']
-
     print(restaurant)
     
     # Get venue_id
     venue_id = data['response']['groups'][0]['items'][0]['venue']['id']
     print(venue_id)
-    # restaurant_image = data['response']['groups'][0]['items'][0]['venue']['name']
 
+    # Get restaurant image
+    url = 'https://api.foursquare.com/v2/venues/%s/photos' % (venue_id)
+    print(url)
+    params = dict(
+    client_id=foursquare_client_id,
+    client_secret=foursquare_client_secret,
+    v='20180323',
+    ll=ll,
+    limit=1
+    )
+    resp = requests.get(url=url, params=params)
+    data = json.loads(resp.text)
 
+    print(json.dumps(data, indent=4))
+    print("\n\n")
+
+    # Grab the first image
+    if data['response']['photos']['items']:
+        firstpic = data['response']['photos']['items'][0]
+        prefix = firstpic['prefix']
+        suffix = firstpic['suffix']
+        imageURL = prefix + "300x300" + suffix
+    else:
+        # no image, insert default image url
+        imageURL = "http://pixabay.com/get/8926af5eb597ca51ca4c/1433440765/cheeseburger-34314_1280.png?direct"
+
+    print(imageURL)
+    print("\n\n")
 
 if __name__ == '__main__':
 	# findARestaurant("Pizza", "Tokyo, Japan")
