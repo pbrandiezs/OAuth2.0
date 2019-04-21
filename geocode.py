@@ -15,4 +15,4 @@ def getGeocodeLocation(inputString):
     longitude = result['results'][0]['geometry']['location']['lng']
     return (latitude,longitude)
 
-print(getGeocodeLocation("Miami, Florida"))
+# print(getGeocodeLocation("Miami, Florida"))
