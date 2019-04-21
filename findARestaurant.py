@@ -32,8 +32,8 @@ def findARestaurant(mealType,location):
 
     #Find a nearby restaurant from latitude and longitude, and mealType from the foursquare API
     ll = str(latitude) + "," + str(longitude)
-    print("ll is: ",ll)
-    print("\n\n")
+    # print("ll is: ",ll)
+    # print("\n\n")
     
     foursquare_client_id = "SM5SF3DDUN3XLAUDKQIHMPH5ON3DF3SD5XDELKQBGF1ZBRDI"
     foursquare_client_secret = "BBDZHLHTTQYTPJ5GTA5VRZ35CPQ4H4IP5OD2MTLR0GCKZBQ4"
@@ -51,11 +51,11 @@ def findARestaurant(mealType,location):
     data = json.loads(resp.text)
 
     if data['response']['groups'][0]['items'][0]['venue']['name']:
-        print(json.dumps(data, indent=4))
-        print("\n\n")
+        # print(json.dumps(data, indent=4))
+        # print("\n\n")
         # Get restaurant name
         restaurant = data['response']['groups'][0]['items'][0]['venue']['name']
-        print(restaurant)
+        # print(restaurant)
 
         # Get restaurant address
         restaurant_address = data['response']['groups'][0]['items'][0]['venue']['location']['formattedAddress']
@@ -63,15 +63,15 @@ def findARestaurant(mealType,location):
         for i in restaurant_address:
             address += i + " "
         restaurant_address = address
-        print(restaurant_address)
+        # print(restaurant_address)
         
         # Get venue_id
         venue_id = data['response']['groups'][0]['items'][0]['venue']['id']
-        print(venue_id)
+        # print(venue_id)
 
         # Get restaurant image
         url = 'https://api.foursquare.com/v2/venues/%s/photos' % (venue_id)
-        print(url)
+        # print(url)
         params = dict(
         client_id=foursquare_client_id,
         client_secret=foursquare_client_secret,
@@ -82,8 +82,8 @@ def findARestaurant(mealType,location):
         resp = requests.get(url=url, params=params)
         data = json.loads(resp.text)
 
-        print(json.dumps(data, indent=4))
-        print("\n\n")
+        # print(json.dumps(data, indent=4))
+        # print("\n\n")
 
         # Grab the first image
         if data['response']['photos']['items']:
@@ -95,11 +95,12 @@ def findARestaurant(mealType,location):
             # no image, insert default image url
             imageURL = "http://pixabay.com/get/8926af5eb597ca51ca4c/1433440765/cheeseburger-34314_1280.png?direct"
 
-        print(imageURL)
-        print("\n\n")
+        # print(imageURL)
+        # print("\n\n")
 
         # return a disctionary with restaurant name and image url
         restaurantInfo = {'name':restaurant, 'address': restaurant_address,'image':imageURL}
+        print("\n\n")
         print("Restaurant Name: %s" % restaurantInfo['name'])
         print("Restaurant Address: %s" % restaurantInfo['address'])
         print("Image: %s" % restaurantInfo['image'])
