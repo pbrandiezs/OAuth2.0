@@ -55,6 +55,14 @@ def findARestaurant(mealType,location):
     # Get restaurant name
     restaurant = data['response']['groups'][0]['items'][0]['venue']['name']
     print(restaurant)
+
+    # Get restaurant address
+    restaurant_address = data['response']['groups'][0]['items'][0]['venue']['location']['formattedAddress']
+    address = ""
+    for i in restaurant_address:
+        address += i + " "
+    restaurant_address = address
+    print(restaurant_address)
     
     # Get venue_id
     venue_id = data['response']['groups'][0]['items'][0]['venue']['id']
@@ -90,8 +98,9 @@ def findARestaurant(mealType,location):
     print("\n\n")
 
     # return a disctionary with restaurant name and image url
-    restaurantInfo = {'name':restaurant, 'image':imageURL}
+    restaurantInfo = {'name':restaurant, 'address': restaurant_address,'image':imageURL}
     print("Restaurant Name: %s" % restaurantInfo['name'])
+    print("Restaurant Address: %s" % restaurantInfo['address'])
     print("Image: %s" % restaurantInfo['image'])
     return restaurantInfo
 
