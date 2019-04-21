@@ -33,6 +33,7 @@ def findARestaurant(mealType,location):
     #Find a nearby restaurant from latitude and longitude, and mealType from the foursquare API
     ll = str(latitude) + "," + str(longitude)
     print("ll is: ",ll)
+    print("\n\n")
     
     foursquare_client_id = "SM5SF3DDUN3XLAUDKQIHMPH5ON3DF3SD5XDELKQBGF1ZBRDI"
     foursquare_client_secret = "BBDZHLHTTQYTPJ5GTA5VRZ35CPQ4H4IP5OD2MTLR0GCKZBQ4"
@@ -48,17 +49,20 @@ def findARestaurant(mealType,location):
     )
     resp = requests.get(url=url, params=params)
     data = json.loads(resp.text)
-    print(data)
+    print(json.dumps(data, indent=4))
+    print("\n\n")
+    restaurant = data['response']['groups'][0]['items'][0]['venue']['name']
+    print(restaurant)
 
 
 
 if __name__ == '__main__':
 	findARestaurant("Pizza", "Tokyo, Japan")
-	findARestaurant("Tacos", "Jakarta, Indonesia")
-	findARestaurant("Tapas", "Maputo, Mozambique")
-	findARestaurant("Falafel", "Cairo, Egypt")
-	findARestaurant("Spaghetti", "New Delhi, India")
-	findARestaurant("Cappuccino", "Geneva, Switzerland")
-	findARestaurant("Sushi", "Los Angeles, California")
-	findARestaurant("Steak", "La Paz, Bolivia")
-	findARestaurant("Gyros", "Sydney, Australia")
+	# findARestaurant("Tacos", "Jakarta, Indonesia")
+	# findARestaurant("Tapas", "Maputo, Mozambique")
+	# findARestaurant("Falafel", "Cairo, Egypt")
+	# findARestaurant("Spaghetti", "New Delhi, India")
+	# findARestaurant("Cappuccino", "Geneva, Switzerland")
+	# findARestaurant("Sushi", "Los Angeles, California")
+	# findARestaurant("Steak", "La Paz, Bolivia")
+	# findARestaurant("Gyros", "Sydney, Australia")
