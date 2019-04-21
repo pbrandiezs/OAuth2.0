@@ -7,7 +7,6 @@ import httplib2
 
 import sys
 import codecs
-import time
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
