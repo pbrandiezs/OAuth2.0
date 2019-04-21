@@ -2,6 +2,7 @@
 
 from geocode import getGeocodeLocation
 import json
+import requests
 import httplib2
 
 import sys
@@ -24,8 +25,32 @@ def findARestaurant(mealType,location):
 	#5. Grab the first image
 	#6. If no image is available, insert default a image url
 	#7. Return a dictionary containing the restaurant name, address, and image url	
+    
+    # Get latitude and longitude
     latitude, longitude = getGeocodeLocation(location)
     print(latitude, longitude)
+
+    #Find a nearby restaurant from latitude and longitude, and mealType from the foursquare API
+    ll = latitude","longitude
+    print("ll is: ",ll)
+    
+    foursquare_client_id = "SM5SF3DDUN3XLAUDKQIHMPH5ON3DF3SD5XDELKQBGF1ZBRDI"
+    foursquare_client_secret = "BBDZHLHTTQYTPJ5GTA5VRZ35CPQ4H4IP5OD2MTLR0GCKZBQ4"
+    url = 'https://api.foursquare.com/v2/venues/explore'
+
+    params = dict(
+    client_id=foursquare_client_id,
+    client_secret=foursquare_client_secret,
+    v='20180323',
+    ll='40.7243,-74.0018',
+    query=mealType,
+    limit=1
+    )
+    resp = requests.get(url=url, params=params)
+    data = json.loads(resp.text)
+    print(data)
+
+
 
 if __name__ == '__main__':
 	findARestaurant("Pizza", "Tokyo, Japan")
