@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 #Make an app.route() decorator here for when the client sends the URI "/puppies"
 
+@app.route('/puppies')
 def puppiesFunction():
   return "Yes, puppies!"
   
